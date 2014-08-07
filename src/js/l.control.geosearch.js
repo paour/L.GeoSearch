@@ -15,7 +15,8 @@ L.GeoSearch.Result = function (x, y, label) {
 L.Control.GeoSearch = L.Control.extend({
     options: {
         position: 'topcenter',
-        showMarker: true
+        showMarker: true,
+		setView: true
     },
 
     _config: {
@@ -183,8 +184,10 @@ L.Control.GeoSearch = L.Control.extend({
                 this._positionMarker.setLatLng([location.Y, location.X]);
         }
 
-        this._map.setView([location.Y, location.X], this._config.zoomLevel, false);
-        this._map.fireEvent('geosearch_showlocation', {Location: location});
+		if (this.options.setView == true) {
+			this._map.setView([location.Y, location.X], this._config.zoomLevel, false);
+			this._map.fireEvent('geosearch_showlocation', {Location: location});
+		}
     },
 
     _printError: function(message) {
