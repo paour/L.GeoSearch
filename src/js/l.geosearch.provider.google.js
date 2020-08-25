@@ -14,14 +14,14 @@ L.GeoSearch.Provider.Google = L.Class.extend({
 
     },
 
-    initialize: function(options) {
+    initialize: function(options, key) {
         options = L.Util.setOptions(this, options);
         if (!window.google || !window.google.maps)
-          this.loadMapsApi();
+          this.loadMapsApi(key);
     },
 
-    loadMapsApi: function () {
-        var url = "https://maps.googleapis.com/maps/api/js?v=3&callback=onLoadGoogleApiCallback&sensor=false";
+    loadMapsApi: function (key) {
+        var url = "https://maps.googleapis.com/maps/api/js?v=3&callback=onLoadGoogleApiCallback&sensor=false&key=" + key;
         var script = document.createElement('script');
         script.id = 'load_google_api';
         script.type = "text/javascript";
